@@ -33,6 +33,7 @@ public class BookMineServiceImpl extends ServiceImpl<BookMineDao, BookMine> impl
     @Transactional
     public Boolean bookBorrow(String bookName) {
         try {
+
             // 将书籍加入书架
             int num = getBaseMapper().insert(new BookMine(0, UserInfo.getInstance().getUsername(), bookName));
             if (num > 0) {
@@ -44,7 +45,7 @@ public class BookMineServiceImpl extends ServiceImpl<BookMineDao, BookMine> impl
             }
         } catch (RuntimeException e) {
             // 处理ServiceException或其他特定业务异常
-            throw new ServiceException("书籍或用户名有误", e);
+            throw new ServiceException("书籍已存在或用户名有误", e);
         }
     }
 
@@ -68,7 +69,7 @@ public class BookMineServiceImpl extends ServiceImpl<BookMineDao, BookMine> impl
     }
 
     @Override
-    public List<BookDepot> bookAllBorrow(int current, int size) {
+    public List<BookDepot> bookAllBorrow() {
         //构建查询器
         LambdaQueryWrapper<BookMine> lqw = new LambdaQueryWrapper<>();
         lqw.eq(BookMine::getUName, UserInfo.getInstance().getUsername());
@@ -78,12 +79,10 @@ public class BookMineServiceImpl extends ServiceImpl<BookMineDao, BookMine> impl
         //将列表转化为书籍名的列表
         List<String> books = bookMineList.stream().map(BookMine::getBName).toList();
         //构建分页查询
-        IPage p=new Page(current,size);
         LambdaQueryWrapper<BookDepot> l=new LambdaQueryWrapper<>();
         //构建查询条件
         l.in(BookDepot::getBookName,books);
         //分页查询
-        IPage page = bookDepotDao.selectPage(p,l);
-        return page.getRecords();//将数据提取出来返回
+        return bookDepotDao.selectList(l);//将数据提取出来返回
     }
 }

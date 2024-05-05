@@ -17,8 +17,8 @@ public class BookMineController {
     private BookMineService bookMineService;
 
     @GetMapping
-    public Result bookMineAllBook(int current,int size){
-        List<BookDepot> books = bookMineService.bookAllBorrow(current, size);
+    public Result bookMineAllBook(){
+        List<BookDepot> books = bookMineService.bookAllBorrow();
         return new Result(Code.SERVICE_OK,books,"查询成功");
     }
     @PostMapping

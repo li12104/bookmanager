@@ -27,5 +27,5 @@ public interface BookMineService extends IService<BookMine> {
      * 获取所有借阅书籍
      * @return
      */
-    List<BookDepot> bookAllBorrow(int current,int size);
+    List<BookDepot> bookAllBorrow();
 }
