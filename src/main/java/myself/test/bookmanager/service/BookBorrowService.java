@@ -19,10 +19,9 @@ public interface BookBorrowService extends IService<BookBorrow> {
 
     /**
      * 查询用户所有借阅记录
-     * @param username
      * @param current
      * @param size
      * @return
      */
-    List<BookBorrow> bookLog(String username,int current,int size);
+    List<BookBorrow> bookLog(int current,int size);
 }

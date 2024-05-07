@@ -6,11 +6,14 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
 @TableName("book_borrow")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class BookBorrow {
 
     @TableId(value = "date_id", type = IdType.AUTO)
@@ -18,7 +21,7 @@ public class BookBorrow {
 
     @TableField(value = "u_name")
     private String uName;
-    @TableField(value = "borrow_data")
+    @TableField(value = "borrow_date")
     private Date borrowDate;
 
     @TableField(value = "borrow_book")

@@ -1,24 +1,23 @@
 package myself.test.bookmanager.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+import java.util.Date;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("book_mine")
-public class BookMine {
+@TableName("book_comment")
+public class BookComment implements Serializable {
     @TableId(type = IdType.AUTO)
-    private Integer id;
-
-    @TableField(value = "u_name")
-    private String uName;
-
-    @TableField(value = "b_name")
-    private String bName;
+    private Integer id=0;
+    private String username="";
+    private String info;
+    private Date time=null;
 }

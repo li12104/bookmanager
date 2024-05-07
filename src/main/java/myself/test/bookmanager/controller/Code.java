@@ -13,6 +13,8 @@ public class Code {
 
     //方法路径错误的异常状态码
     public static final int METHOD_NOTFOUND = 1004;
+    //资源路径错误的异常状态码
+    public static final int RESOURCE_NOTFOUND = 1007;
 
     // 系统级错误的状态码
     public static final int SYSTEM_ERROR = 1003;

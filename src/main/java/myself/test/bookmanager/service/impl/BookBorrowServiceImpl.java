@@ -8,6 +8,7 @@ import myself.test.bookmanager.dao.BookBorrowDao;
 import myself.test.bookmanager.exception.ServiceException;
 import myself.test.bookmanager.model.BookBorrow;
 import myself.test.bookmanager.service.BookBorrowService;
+import myself.test.bookmanager.util.UserInfo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,9 +29,9 @@ public class BookBorrowServiceImpl extends ServiceImpl<BookBorrowDao, BookBorrow
 
 
     @Override
-    public List<BookBorrow> bookLog(String username, int current, int size) {
+    public List<BookBorrow> bookLog( int current, int size) {
         LambdaQueryWrapper<BookBorrow> lqw = new LambdaQueryWrapper<>();
-        lqw.eq(BookBorrow::getUName, username);
+        lqw.eq(BookBorrow::getUName, UserInfo.getInstance().getUsername());
         IPage p = new Page(current, size);
         IPage page = getBaseMapper().selectPage(p, lqw);
         return page.getRecords();
