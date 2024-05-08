@@ -20,17 +20,18 @@ public class CustomInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token=request.getHeader("Authorization");
+        response.setStatus(HttpServletResponse.SC_OK);
         response.setCharacterEncoding("utf-8");
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);//设置返回数据为json格式
         if (token == null || token.isEmpty()) {
             // 如果没有提供token，返回未授权错误
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);// 设置响应状态码为401（未授权）
             WebUtil.sendError(response,Code.TOKEN_NOTFOUND,"请在请求头中添加token信息");
             return false;
         }
         boolean verify = JwtToken.verify(token);//校验登录信息是否过期
         if (verify){
             try {
+                response.setHeader("Access-Control-Allow-Origin","*");
                 String username=JwtToken.getUsername(token);//获取用户名
                 UserInfo.getInstance().setUsername(username);//将用户名存入单例类中
                 return true;
@@ -39,7 +40,6 @@ public class CustomInterceptor implements HandlerInterceptor {
                 return false;
             }
         }else {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);// 设置响应状态码为401（未授权）
             WebUtil.sendError(response,Code.TOKEN_ISLATE,"认证失败,登录信息已失效,请重新登录");
             return false;
         }
