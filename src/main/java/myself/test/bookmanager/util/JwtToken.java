@@ -1,22 +1,18 @@
 package myself.test.bookmanager.util;
 
 import com.auth0.jwt.JWT;
-import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
-import com.auth0.jwt.interfaces.DecodedJWT;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class JwtToken {
 
-    private static final String SECRET_KEY = "qazwsxedcrfv"; // 请使用你自己的密钥
+    private static final String SECRET_KEY = "lijianbookmanger";
 
     // 生成JWT token
-    public static String generateToken(String username,int isAdmin) {
+    public static String generateToken(int type) {
         // 设置token的过期时间
         String token="";
         long ttlMillis = 1000L * 60 * 60 * 24; // 1天
@@ -24,12 +20,10 @@ public class JwtToken {
         try {
             // 创建一个算法实例，这里使用HS256算法
             Algorithm algorithm = Algorithm.HMAC256(SECRET_KEY);
-            // 设置头部信息
-            Boolean admin=isAdmin==0?true : false;
             // 生成JWT
+            boolean admin=type==0?true:false;
             token = JWT.create()
-                    .withClaim("isAdmin",admin)
-                    .withClaim("username",username)
+                    .withClaim("admin",admin)
                     .withClaim("exp", expirationDate)
                     .withExpiresAt(expirationDate)
                     .sign(algorithm);
@@ -48,17 +42,19 @@ public class JwtToken {
         try {
             Date exp=JWT.decode(token).getClaim("exp").asDate();//获取过期时间
             Boolean isAfterNow=new Date().after(exp);//比对日期
-            return isAfterNow==false;
+            return isAfterNow;
         } catch (JWTVerificationException e){
             return false;
         }
     }
 
-    public static String getUsername(String token){
+
+    public static boolean isAdmin(String token){
         try {
-            return JWT.decode(token).getClaim("username").asString();//获取用户名
+            return JWT.decode(token).getClaim("admin").asBoolean();//获取用户名
         } catch (JWTVerificationException e){
-            return null;
+            e.printStackTrace();
+            return false;
         }
     }
 }

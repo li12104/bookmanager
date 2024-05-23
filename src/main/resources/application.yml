@@ -21,4 +21,4 @@ mybatis-plus:
       banner: false
 logging:
   level:
-    root: warn
+    root: error
