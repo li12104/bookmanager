@@ -15,9 +15,9 @@ import java.util.Date;
 @NoArgsConstructor
 public class Comment implements Serializable {
     @TableId(type = IdType.AUTO)
-    private Integer id;
+    private Integer id=0;
     @TableField(value = "user_id")
-    private Integer userId;
+    private int userId;
     private String message;
     @TableField(value = "create_time")
     private Date createTime=null;

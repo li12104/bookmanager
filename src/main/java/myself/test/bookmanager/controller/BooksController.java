@@ -17,11 +17,11 @@ public class BooksController {
 
     @GetMapping()
     public Result getAllBooks(Integer num){
-        return new Result(Code.SERVICE_OK, IBooksService.getAllBooks(num),"请求成功");
+        return new Result(Code.SERVICE_OK, IBooksService.getAllBooks(num),"请求成功!");
     }
     @GetMapping("/byName")
     public Result getBooks(String name,Integer num){
-        return new Result(Code.SERVICE_OK, IBooksService.getBooks(name,num),"请求成功");
+        return new Result(Code.SERVICE_OK, IBooksService.getBooks(name,num),"请求成功!");
     }
 
     @PostMapping
@@ -29,9 +29,9 @@ public class BooksController {
         try {
             boolean success = IBooksService.saveBooks(books);
             if (success) {
-                return new Result(Code.SERVICE_OK, "新增成功");
+                return new Result(Code.SERVICE_OK, "新增成功!");
             }
-            return new Result(Code.SERVICE_ERROR, "新增失败");
+            return new Result(Code.SERVICE_ERROR, "新增失败!");
         } catch (ServiceException e) {
             return new Result(Code.BUSINESS_EXCEPTION, e.getMessage());
         }
@@ -42,9 +42,9 @@ public class BooksController {
         try {
             boolean success = IBooksService.updateBooks(books);
             if (success) {
-                return new Result(Code.SERVICE_OK, "修改成功");
+                return new Result(Code.SERVICE_OK, "修改成功!");
             }
-            return new Result(Code.SERVICE_ERROR, "修改失败");
+            return new Result(Code.SERVICE_ERROR, "修改失败!");
         } catch (ServiceException e) {
             return new Result(Code.BUSINESS_EXCEPTION, e.getMessage());
         }
@@ -54,17 +54,17 @@ public class BooksController {
     public Result deleteById(@PathVariable int id){
         boolean success = IBooksService.deleteBooksById(id);
         if (success) {
-            return new Result(Code.SERVICE_OK, "删除成功");
+            return new Result(Code.SERVICE_OK, "删除成功!");
         }
-        return new Result(Code.SERVICE_ERROR, "删除失败");
+        return new Result(Code.SERVICE_ERROR, "删除失败!");
     }
 
     @GetMapping("/{id}")
     public Result getBook(@PathVariable int id){
         BooksVO book = IBooksService.getBook(id);
         if (book==null){
-            return new Result(Code.SERVICE_ERROR, "未查询到该书籍");
+            return new Result(Code.SERVICE_ERROR, "未查询到该书籍!");
         }
-        return new Result(Code.SERVICE_OK, book,"请求成功");
+        return new Result(Code.SERVICE_OK, book,"请求成功!");
     }
 }

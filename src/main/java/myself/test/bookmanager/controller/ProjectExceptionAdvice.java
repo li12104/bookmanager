@@ -10,12 +10,12 @@ public class ProjectExceptionAdvice {
 
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
     public Result notApiFoundException(HttpRequestMethodNotSupportedException e) {
-        return new Result(Code.METHOD_NOTFOUND, "未找到该路径的方法");
+        return new Result(Code.METHOD_NOTFOUND, "未找到该路径的方法!");
     }
 
     @ExceptionHandler(NoResourceFoundException.class)
     public Result notResourceFoundException(NoResourceFoundException e) {
-        return new Result(Code.RESOURCE_NOTFOUND, "未找到该路径的资源");
+        return new Result(Code.RESOURCE_NOTFOUND, "未找到该路径的资源!");
     }
 
     @ExceptionHandler(Exception.class)

@@ -35,7 +35,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedOrigins("*") // 允许所有请求
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS") // 允许的方法
                 .allowedHeaders("*") // 允许的头信息
-                .allowCredentials(false) // 允许携带认证信息（cookies, HTTP认证及客户端SSL证明等）
+                .allowCredentials(false) // 不允许携带认证信息（cookies, HTTP认证及客户端SSL证明等）
                 .maxAge(3600); // 预检请求的缓存时间（秒），默认为1800秒
     }
 }

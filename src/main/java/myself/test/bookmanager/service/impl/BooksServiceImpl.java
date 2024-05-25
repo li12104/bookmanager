@@ -38,13 +38,13 @@ public class BooksServiceImpl extends ServiceImpl<BooksMapper, Books> implements
     @Override
     public boolean saveBooks(Books books) {
         if (books.getNumber()<=0){
-            throw new ServiceException("新增书籍数量应大于等于1！",null);
+            throw new ServiceException("新增书籍数量应大于等于1!",null);
         }
         try {
             boolean success = save(books);
             return success;
         }catch (RuntimeException e){
-            throw new ServiceException("书籍已存在！",null);
+            throw new ServiceException("书籍已存在!",null);
         }
     }
 

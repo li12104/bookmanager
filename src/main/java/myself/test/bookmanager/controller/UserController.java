@@ -22,10 +22,10 @@ public class UserController {
     public Result login(@RequestBody Login login) {
         UserDTO resultUser = IUserService.login(login);
         if (resultUser == null) {
-            return new Result(Code.SERVICE_ERROR, "账号或密码错误");
+            return new Result(Code.SERVICE_ERROR, "账号或密码错误!");
         }
         String token = JwtToken.generateToken(resultUser.getIsAdmin().getNum());
-        return new Result(Code.SERVICE_OK, resultUser, "登录成功", token); // 返回token和角色信息
+        return new Result(Code.SERVICE_OK, resultUser, "登录成功!", token); // 返回token和角色信息
     }
 
     @PostMapping("/register")
@@ -33,9 +33,9 @@ public class UserController {
         try {
             Boolean isSuccess = IUserService.register(register);
             if (isSuccess) {
-                return new Result(Code.SERVICE_OK, "注册成功");
+                return new Result(Code.SERVICE_OK, "注册成功!");
             }
-            return new Result(Code.SERVICE_ERROR, "注册失败");
+            return new Result(Code.SERVICE_ERROR, "注册失败!");
         } catch (ServiceException e) {
             return new Result(Code.BUSINESS_EXCEPTION, e.getMessage());
         }
@@ -43,7 +43,7 @@ public class UserController {
 
     @GetMapping
     public Result getAllUser() {
-        return new Result(Code.SERVICE_OK, IUserService.getAllUser(), "请求成功");
+        return new Result(Code.SERVICE_OK, IUserService.getAllUser(), "请求成功!");
     }
 
     @PutMapping
@@ -51,9 +51,9 @@ public class UserController {
         try {
             boolean success= IUserService.updateUser(user);
             if (success){
-                return new Result(Code.SERVICE_OK,"修改成功");
+                return new Result(Code.SERVICE_OK,"修改成功!");
             }
-            return new Result(Code.SERVICE_ERROR,"修改失败");
+            return new Result(Code.SERVICE_ERROR,"修改失败!");
         }catch (ServiceException e){
             return new Result(Code.BUSINESS_EXCEPTION,e.getMessage());
         }
@@ -64,9 +64,9 @@ public class UserController {
         try {
             boolean success= IUserService.deleteUserById(id);
             if (success){
-                return new Result(Code.SERVICE_OK,"删除成功");
+                return new Result(Code.SERVICE_OK,"删除成功!");
             }
-            return new Result(Code.SERVICE_ERROR,"删除失败");
+            return new Result(Code.SERVICE_ERROR,"删除失败!");
         }catch (ServiceException e){
             return new Result(Code.BUSINESS_EXCEPTION,e.getMessage());
         }

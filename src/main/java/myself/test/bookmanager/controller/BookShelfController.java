@@ -17,7 +17,7 @@ public class BookShelfController {
     @GetMapping("/{id}")
     public Result getUserBooks(@PathVariable int id) {
         try {
-            return new Result(Code.SERVICE_OK, bookShelfService.getUserBooks(id), "请求成功");
+            return new Result(Code.SERVICE_OK, bookShelfService.getUserBooks(id), "请求成功!");
         } catch (ServiceException e) {
             return new Result(Code.BUSINESS_EXCEPTION, e.getMessage());
         }
@@ -28,9 +28,9 @@ public class BookShelfController {
         try {
             boolean success = bookShelfService.booksBorrow(bookId, userId);
             if (success) {
-                return new Result(Code.SERVICE_OK, "加入成功！");
+                return new Result(Code.SERVICE_OK, "加入成功!");
             }
-            return new Result(Code.SERVICE_ERROR, "加入失败！");
+            return new Result(Code.SERVICE_ERROR, "加入失败!");
         } catch (ServiceException e) {
             return new Result(Code.BUSINESS_EXCEPTION, e.getMessage());
         }
@@ -41,9 +41,9 @@ public class BookShelfController {
         try {
             boolean success = bookShelfService.booksReturn(bookId, userId);
             if (success) {
-                return new Result(Code.SERVICE_OK, "归还成功！");
+                return new Result(Code.SERVICE_OK, "归还成功!");
             }
-            return new Result(Code.SERVICE_ERROR, "归还失败！");
+            return new Result(Code.SERVICE_ERROR, "归还失败!");
         } catch (ServiceException e) {
             return new Result(Code.BUSINESS_EXCEPTION, e.getMessage());
         }

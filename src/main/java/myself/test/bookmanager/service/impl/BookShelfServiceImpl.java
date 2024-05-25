@@ -56,11 +56,11 @@ public class BookShelfServiceImpl extends ServiceImpl<BookShelfMapper, BookShelf
                 throw new ServiceException("书籍信息不存在!", null);
             }
             if (one.getNumber() < 1) {
-                throw new ServiceException("书籍数量为0无法借阅！", null);
+                throw new ServiceException("书籍数量为0无法借阅!", null);
             }
             User user = Db.lambdaQuery(User.class).eq(User::getId, userId).one();
             if (user == null) {
-                throw new ServiceException("用户信息不存在！", null);
+                throw new ServiceException("用户信息不存在!", null);
             }
             //进行借阅操作
             boolean success = this.save(new BookShelf(0, bookId, userId));
@@ -76,7 +76,7 @@ public class BookShelfServiceImpl extends ServiceImpl<BookShelfMapper, BookShelf
             return false;
         } catch (DataIntegrityViolationException e) {
             //处理可能会产生的唯一索引值异常
-            throw new ServiceException("书架中已存在此书籍！", e);
+            throw new ServiceException("书架中已存在此书籍!", e);
         }
     }
 
@@ -88,7 +88,7 @@ public class BookShelfServiceImpl extends ServiceImpl<BookShelfMapper, BookShelf
         //查询书架中是否存在此数据
         BookShelf bookShelf=Db.lambdaQuery(BookShelf.class).eq(BookShelf::getBookId,bookId).eq(BookShelf::getUserId,userId).one();
         if (bookShelf==null){
-            throw new ServiceException("参数传递有误！未有该书信息！",null);
+            throw new ServiceException("参数传递有误!未有该书信息!",null);
         }
         //进行归还操作
         boolean success = baseMapper.deleteById(bookShelf.getId())>0;

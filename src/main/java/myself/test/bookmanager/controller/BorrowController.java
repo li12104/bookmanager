@@ -25,7 +25,7 @@ public class BorrowController {
     @GetMapping("/{type}")
     private Result getBorrowLog(@PathVariable int type) {
         try {
-            return new Result(Code.SERVICE_OK,borrowService.getBorrowLog(BorrowType.of(type)), "请求成功");
+            return new Result(Code.SERVICE_OK,borrowService.getBorrowLog(BorrowType.of(type)), "请求成功!");
         } catch (ServiceException e) {
             return new Result(Code.BUSINESS_EXCEPTION, e.getMessage());
         }
@@ -33,13 +33,13 @@ public class BorrowController {
 
     @GetMapping("/user")
     public Result getUserBorrowLog(int userId) {
-        return new Result(Code.SERVICE_OK, borrowService.getBorrowUserLog(userId), "请求成功");
+        return new Result(Code.SERVICE_OK, borrowService.getBorrowUserLog(userId), "请求成功!");
     }
 
     @GetMapping("/user/type")
     public Result getUserBorrowLog(int userId, int type) {
         try {
-            return new Result(Code.SERVICE_OK, borrowService.getBorrowUserLog(userId, BorrowType.of(type)), "请求成功");
+            return new Result(Code.SERVICE_OK, borrowService.getBorrowUserLog(userId, BorrowType.of(type)), "请求成功!");
         } catch (ServiceException e) {
             return new Result(Code.BUSINESS_EXCEPTION, e.getMessage());
         }

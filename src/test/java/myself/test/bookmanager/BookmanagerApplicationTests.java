@@ -12,9 +12,9 @@ class BookmanagerApplicationTests {
 
     @Autowired
     private ICommentService commentService;
+
     @Test
     void contextLoads() {
-        System.out.println(commentService.getAllComment());
     }
 
 }
