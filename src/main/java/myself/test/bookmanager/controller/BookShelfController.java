@@ -23,7 +23,7 @@ public class BookShelfController {
         }
     }
 
-    @PostMapping("/out")
+    @PostMapping()
     public Result booksBorrow(@Param("bookId") int bookId, @Param("userId") int userId) {
         try {
             boolean success = bookShelfService.booksBorrow(bookId, userId);

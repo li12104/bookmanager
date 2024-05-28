@@ -7,6 +7,11 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
   application:
     name: bookmanager
+  thymeleaf:
+    mode: HTML5
+    encoding: utf-8
+    # 禁用缓存
+    cache: false
 
 
 server:

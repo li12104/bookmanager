@@ -5,10 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerIntercept
 import myself.test.bookmanager.controller.interceptor.CustomInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
 @EnableWebMvc
@@ -37,5 +34,10 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedHeaders("*") // 允许的头信息
                 .allowCredentials(false) // 不允许携带认证信息（cookies, HTTP认证及客户端SSL证明等）
                 .maxAge(3600); // 预检请求的缓存时间（秒），默认为1800秒
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/**").addResourceLocations("classpath:/static/");
     }
 }

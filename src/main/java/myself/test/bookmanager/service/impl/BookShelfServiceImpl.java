@@ -40,7 +40,7 @@ public class BookShelfServiceImpl extends ServiceImpl<BookShelfMapper, BookShelf
         //根据书籍id查询书籍信息
         List<Books> books = Db.lambdaQuery(Books.class).in(Books::getId, ids).list();
         //将books中的几个字段提取出来组成新的BooksVO集合
-        List<BooksVO> booksVOS = books.stream().map(e -> new BooksVO(e.getTitle(), e.getAuthor(), e.getInfo())).toList();
+        List<BooksVO> booksVOS = books.stream().map(e -> new BooksVO(e.getId(),e.getTitle(), e.getAuthor(), e.getInfo())).toList();
         //新建一个BookShelfDTO对象并且赋值
         return new BookShelfDTO(id, booksVOS);
     }

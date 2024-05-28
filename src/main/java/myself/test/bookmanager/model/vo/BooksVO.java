@@ -15,6 +15,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BooksVO implements Serializable {
+    private Integer bookId;
     private String title;
     private String author;
     private String info;

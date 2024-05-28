@@ -27,6 +27,7 @@ public class CustomInterceptor implements HandlerInterceptor {
                 WebUtil.sendError(response, Code.NOT_QX, "该用户权限等级不够！");
                 return false;
             }
+            return true;
         }
         //不是书架操作都需要判断权限
         if (!url.contains("bookshelf")){

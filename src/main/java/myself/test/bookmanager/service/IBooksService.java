@@ -23,7 +23,7 @@ public interface IBooksService extends IService<Books> {
      */
     List<Books> getBooks(String name,Integer onlyHave);
 
-    /**'
+    /**
      * 获取指定书籍
      */
     BooksVO getBook(int id);
